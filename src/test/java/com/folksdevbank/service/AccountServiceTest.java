@@ -27,55 +27,36 @@ public class AccountServiceTest {
         customerService = Mockito.mock(CustomerService.class);
         accountDtoConverter = Mockito.mock(AccountDtoConverter.class);
 
-        accountService = new AccountService(accountRepository, customerService, accountDtoConverter);
+        accountService = new AccountService(accountRepository,
+                                            customerService,
+                                            accountDtoConverter);
     }
 
     @Test
     public void whenCreateAccountCalledWithValidRequest_itShouldReturnValidAccountDto(){
-        CreateAccountRequest createAccountRequest = new CreateAccountRequest("1234");
-        createAccountRequest.setCustomerId("12345");
-        createAccountRequest.setBalance(100.0);
-        createAccountRequest.setCity(City.ISTANBUL);
-        createAccountRequest.setCurrency(Currency.TRY);
+        //Creation test data
+        CreateAccountRequest createAccountRequest = generateCreateAccountRequest();
+        Customer customer = generateCustomer();
+        Account account = generateAccount(createAccountRequest);
+        AccountDto accountDto = generateAccountDto();
 
-        Customer customer = Customer.builder()
-                .id("12345")
-                .address("Adres")
-                .city(City.ISTANBUL)
-                .dateOfBirth(1998)
-                .name("Muratcan")
-                .build();
-
-        Account account = Account.builder()
-                .id(createAccountRequest.getId())
-                .balance(createAccountRequest.getBalance())
-                .currency(createAccountRequest.getCurrency())
-                .customerId(createAccountRequest.getCustomerId())
-                .city(createAccountRequest.getCity())
-                .build();
-
-        AccountDto accountDto = AccountDto.builder()
-                .id("1234")
-                .customerId("12345")
-                .currency(Currency.TRY)
-                .balance(100.0)
-                .build();
-
+        //Determine mock services behavior regarding test scenario
         Mockito.when(customerService.getCustomerById("12345")).thenReturn(customer);
         Mockito.when(accountRepository.save(account)).thenReturn(account);
         Mockito.when(accountDtoConverter.convert(account)).thenReturn(accountDto);
 
+        //Call the testing method
         AccountDto result = accountService.createAccount(createAccountRequest);
 
+        //Check results and verify the mock methods are called
         Assert.assertEquals(result, accountDto);
-
         Mockito.verify(customerService).getCustomerById("12345");
         Mockito.verify(accountRepository).save(account);
         Mockito.verify(accountDtoConverter).convert(account);
     }
 
     @Test(expected = RuntimeException.class)
-    public void whenCreateAccountCalledWithNonExistCustomer_itShouldReturnEmptyAccountDto(){
+    public void whenCreateAccountCalledWithNonExistCustomer_itShouldThrowRuntimeException(){
         CreateAccountRequest createAccountRequest = new CreateAccountRequest("1234");
         createAccountRequest.setCustomerId("12345");
         createAccountRequest.setBalance(100.0);
@@ -94,7 +75,7 @@ public class AccountServiceTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void whenCreateAccountCalledWithCustomerWithOutId_itShouldReturnEmptyAccountDto(){
+    public void whenCreateAccountCalledWithWithEmptyCustomerId_itShouldThrowRuntimeException(){
         CreateAccountRequest createAccountRequest = new CreateAccountRequest("1234");
         createAccountRequest.setCustomerId("12345");
         createAccountRequest.setBalance(100.0);
@@ -147,6 +128,44 @@ public class AccountServiceTest {
         Mockito.verify(customerService).getCustomerById("12345");
         Mockito.verify(accountRepository).save(account);
         Mockito.verifyNoInteractions(accountDtoConverter);
+    }
+
+    private CreateAccountRequest generateCreateAccountRequest(){
+        CreateAccountRequest createAccountRequest = new CreateAccountRequest("1234");
+        createAccountRequest.setCustomerId("12345");
+        createAccountRequest.setBalance(100.0);
+        createAccountRequest.setCity(City.ISTANBUL);
+        createAccountRequest.setCurrency(Currency.TRY);
+        return createAccountRequest;
+    }
+
+    private Customer generateCustomer() {
+        return Customer.builder()
+                .id("12345")
+                .address("Adres")
+                .city(City.ISTANBUL)
+                .dateOfBirth(1998)
+                .name("Muratcan")
+                .build();
+    }
+
+    private Account generateAccount(CreateAccountRequest accountRequest) {
+        return Account.builder()
+                .id(accountRequest.getId())
+                .balance(accountRequest.getBalance())
+                .currency(accountRequest.getCurrency())
+                .customerId(accountRequest.getCustomerId())
+                .city(accountRequest.getCity())
+                .build();
+    }
+
+    private AccountDto generateAccountDto() {
+        return AccountDto.builder()
+                .id("1234")
+                .customerId("12345")
+                .currency(Currency.TRY)
+                .balance(100.0)
+                .build();
     }
 
 

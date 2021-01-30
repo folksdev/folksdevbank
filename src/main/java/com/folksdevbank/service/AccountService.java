@@ -4,6 +4,7 @@ import com.folksdevbank.dto.AccountDto;
 import com.folksdevbank.dto.AccountDtoConverter;
 import com.folksdevbank.dto.CreateAccountRequest;
 import com.folksdevbank.dto.UpdateAccountRequest;
+import com.folksdevbank.exception.CustomerNotFoundException;
 import com.folksdevbank.model.Account;
 import com.folksdevbank.model.Customer;
 import com.folksdevbank.repository.AccountRepository;
@@ -28,8 +29,9 @@ public class AccountService {
 
     public AccountDto createAccount(CreateAccountRequest createAccountRequest) {
         Customer customer = customerService.getCustomerById(createAccountRequest.getCustomerId());
+
         if (customer.getId() == null || customer.getId().trim().equals("")) {
-            throw new RuntimeException("Customer Not Found!");
+            throw new CustomerNotFoundException("Customer Not Found!");
         }
 
         Account account = Account.builder()
