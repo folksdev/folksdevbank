@@ -12,7 +12,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/v1/account")
+@RequestMapping("/v1/accounts")
 public class AccountController {
 
     private final AccountService accountService;
