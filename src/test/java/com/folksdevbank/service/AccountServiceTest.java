@@ -12,6 +12,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
+import org.springframework.amqp.core.AmqpTemplate;
+import org.springframework.amqp.core.DirectExchange;
 
 public class AccountServiceTest {
 
@@ -20,16 +22,21 @@ public class AccountServiceTest {
     private AccountRepository accountRepository;
     private CustomerService customerService;
     private AccountDtoConverter accountDtoConverter;
+    private DirectExchange exchange;
+    private AmqpTemplate rabbitTemplate;
+
 
     @Before
     public void setUp() throws Exception {
         accountRepository = Mockito.mock(AccountRepository.class);
         customerService = Mockito.mock(CustomerService.class);
         accountDtoConverter = Mockito.mock(AccountDtoConverter.class);
+        exchange = Mockito.mock(DirectExchange.class);
+        rabbitTemplate = Mockito.mock(AmqpTemplate.class);
 
         accountService = new AccountService(accountRepository,
                                             customerService,
-                                            accountDtoConverter);
+                                            accountDtoConverter, exchange, rabbitTemplate);
     }
 
     @Test

@@ -2,6 +2,7 @@ package com.folksdevbank;
 
 import com.folksdevbank.model.Account;
 import com.folksdevbank.model.City;
+import com.folksdevbank.model.Currency;
 import com.folksdevbank.model.Customer;
 import com.folksdevbank.repository.AccountRepository;
 import com.folksdevbank.repository.CustomerRepository;
@@ -10,7 +11,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.util.Arrays;
-import java.util.List;
 
 @SpringBootApplication
 public class FolksdevbankApplication implements CommandLineRunner {
@@ -58,18 +58,21 @@ public class FolksdevbankApplication implements CommandLineRunner {
 				.customerId("1234568")
 				.city(City.ISTANBUL)
 				.balance(1320.0)
+				.currency(Currency.TRY)
 				.build();
 		Account a2 = Account.builder()
 				.id("101")
 				.customerId("789456")
 				.city(City.ISTANBUL)
 				.balance(7898.0)
+				.currency(Currency.TRY)
 				.build();
 		Account a3 = Account.builder()
 				.id("102")
 				.customerId("456238")
 				.city(City.ISTANBUL)
 				.balance(120000.0)
+				.currency(Currency.TRY)
 				.build();
 
 		accountRepository.saveAll(Arrays.asList(a1,a2,a3));

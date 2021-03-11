@@ -2,6 +2,7 @@ package com.folksdevbank.controller;
 
 import com.folksdevbank.dto.AccountDto;
 import com.folksdevbank.dto.CreateAccountRequest;
+import com.folksdevbank.dto.MoneyTransferRequest;
 import com.folksdevbank.dto.UpdateAccountRequest;
 import com.folksdevbank.service.AccountService;
 import org.springframework.http.HttpStatus;
@@ -56,6 +57,12 @@ public class AccountController {
     @PutMapping("/add/{id}/{amount}")
     public ResponseEntity<AccountDto> addMoney(@PathVariable String id, @PathVariable Double amount) {
         return ResponseEntity.ok(accountService.addMoney(id, amount));
+    }
+
+    @PutMapping("/transfer")
+    public ResponseEntity<Void> transferMoney(@RequestBody MoneyTransferRequest transferRequest) {
+        accountService.transferMoney(transferRequest);
+        return ResponseEntity.ok().build();
     }
 
 }
