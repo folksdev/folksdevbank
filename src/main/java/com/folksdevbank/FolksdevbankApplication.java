@@ -76,6 +76,9 @@ public class FolksdevbankApplication implements CommandLineRunner {
 				.build();
 
 		accountRepository.saveAll(Arrays.asList(a1,a2,a3));
-
 	}
+
+
+
 }
+

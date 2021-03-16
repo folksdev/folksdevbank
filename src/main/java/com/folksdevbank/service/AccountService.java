@@ -21,6 +21,7 @@ public class AccountService {
     private final AccountRepository accountRepository;
     private final CustomerService customerService;
     private final AccountDtoConverter accountDtoConverter;
+
     private final DirectExchange exchange;
 
     private final AmqpTemplate rabbitTemplate;

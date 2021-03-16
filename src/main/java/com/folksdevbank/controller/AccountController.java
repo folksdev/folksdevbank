@@ -60,9 +60,9 @@ public class AccountController {
     }
 
     @PutMapping("/transfer")
-    public ResponseEntity<Void> transferMoney(@RequestBody MoneyTransferRequest transferRequest) {
+    public ResponseEntity<String> transferMoney(@RequestBody MoneyTransferRequest transferRequest) {
         accountService.transferMoney(transferRequest);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok("İşleminiz başarıyla alınmıştır!");
     }
 
 }
