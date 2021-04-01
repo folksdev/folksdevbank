@@ -3,10 +3,7 @@ package com.folksdevbank.service;
 import com.folksdevbank.dto.AccountDto;
 import com.folksdevbank.dto.AccountDtoConverter;
 import com.folksdevbank.dto.CreateAccountRequest;
-import com.folksdevbank.model.Account;
-import com.folksdevbank.model.City;
-import com.folksdevbank.model.Currency;
-import com.folksdevbank.model.Customer;
+import com.folksdevbank.model.*;
 import com.folksdevbank.repository.AccountRepository;
 import org.junit.Assert;
 import org.junit.Before;
@@ -14,6 +11,9 @@ import org.junit.Test;
 import org.mockito.Mockito;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.amqp.core.DirectExchange;
+
+import java.util.Arrays;
+import java.util.Set;
 
 public class AccountServiceTest {
 
@@ -112,7 +112,7 @@ public class AccountServiceTest {
 
         Customer customer = Customer.builder()
                 .id("12345")
-                .address("Adres")
+                .address(Arrays.asList(Address.builder().city(City.ISTANBUL).postcode("456312").addressDetails("bu bir adrestir").build()))
                 .city(City.ISTANBUL)
                 .dateOfBirth(1998)
                 .name("Muratcan")
@@ -149,7 +149,7 @@ public class AccountServiceTest {
     private Customer generateCustomer() {
         return Customer.builder()
                 .id("12345")
-                .address("Adres")
+                .address(Arrays.asList(Address.builder().city(City.ISTANBUL).postcode("456312").addressDetails("bu bir adrestir").build()))
                 .city(City.ISTANBUL)
                 .dateOfBirth(1998)
                 .name("Muratcan")

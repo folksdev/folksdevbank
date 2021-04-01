@@ -1,17 +1,20 @@
 package com.folksdevbank.model;
 
 import lombok.*;
+import net.minidev.json.annotate.JsonIgnore;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
+import java.util.Set;
 
-@Entity
+
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Customer{
+@Entity
+public class Customer {
 
     @Id
     private String id;
@@ -19,5 +22,7 @@ public class Customer{
     private String name;
     private Integer dateOfBirth;
     private City city;
-    private String address;
+
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+    private List<Address> address;
 }

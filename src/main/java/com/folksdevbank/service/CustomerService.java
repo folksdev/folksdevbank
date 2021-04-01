@@ -9,6 +9,7 @@ import com.folksdevbank.model.Customer;
 import com.folksdevbank.repository.CustomerRepository;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -27,7 +28,7 @@ public class CustomerService {
     public CustomerDto createCustomer(CreateCustomerRequest customerRequest){
         Customer customer = new Customer();
         customer.setId(customerRequest.getId());
-        customer.setAddress(customerRequest.getAddress());
+        //customer.setAddress(customerRequest.getAddress());
         customer.setName(customerRequest.getName());
         customer.setDateOfBirth(customerRequest.getDateOfBirth());
         customer.setCity(City.valueOf(customerRequest.getCity().name()));
@@ -49,6 +50,7 @@ public class CustomerService {
         return customerDtoList;
     }
 
+    @Transactional
     public CustomerDto getCustomerDtoById(String id) {
         Optional<Customer> customerOptional = customerRepository.findById(id);
 
@@ -66,7 +68,7 @@ public class CustomerService {
             customer.setName(customerRequest.getName());
             customer.setCity(City.valueOf(customerRequest.getCity().name()));
             customer.setDateOfBirth(customerRequest.getDateOfBirth());
-            customer.setAddress(customerRequest.getAddress());
+            //customer.setAddress(customerRequest.getAddress());
             customerRepository.save(customer);
         });
 

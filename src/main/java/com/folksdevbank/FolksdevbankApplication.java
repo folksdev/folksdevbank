@@ -1,10 +1,8 @@
 package com.folksdevbank;
 
-import com.folksdevbank.model.Account;
-import com.folksdevbank.model.City;
-import com.folksdevbank.model.Currency;
-import com.folksdevbank.model.Customer;
+import com.folksdevbank.model.*;
 import com.folksdevbank.repository.AccountRepository;
+import com.folksdevbank.repository.AddressRepository;
 import com.folksdevbank.repository.CustomerRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -17,10 +15,14 @@ public class FolksdevbankApplication implements CommandLineRunner {
 
 	private final AccountRepository accountRepository;
 	private final CustomerRepository customerRepository;
+	private final AddressRepository addressRepository;
 
-	public FolksdevbankApplication(AccountRepository accountRepository, CustomerRepository customerRepository) {
+	public FolksdevbankApplication(AccountRepository accountRepository,
+								   CustomerRepository customerRepository,
+								   AddressRepository addressRepository) {
 		this.accountRepository = accountRepository;
 		this.customerRepository = customerRepository;
+		this.addressRepository = addressRepository;
 	}
 
 	public static void main(String[] args) {
@@ -32,26 +34,32 @@ public class FolksdevbankApplication implements CommandLineRunner {
 		Customer c1 = Customer.builder()
 				.id("1234568")
 				.name("Cagri")
+				.address(Arrays.asList(Address.builder().city(City.ISTANBUL).postcode("456312").addressDetails("bu bir adrestir").build()))
 				.city(City.ISTANBUL)
-				.address("Ev")
 				.dateOfBirth(1988)
 				.build();
+
+
 		Customer c2 = Customer.builder()
 				.id("789456")
 				.name("Semih")
 				.city(City.MANISA)
-				.address("Ev")
+				.address(Arrays.asList(Address.builder().city(City.MANISA).postcode("456312").addressDetails("bu bir adrestir 2").build()))
 				.dateOfBirth(2000)
 				.build();
+
 		Customer c3 = Customer.builder()
 				.id("456238")
 				.name("untpleax")
 				.city(City.IZMIR)
-				.address("Ev")
+				 .address(Arrays.asList(Address.builder().city(City.IZMIR).postcode("456312").addressDetails("bu bir adrestir 3").build()))
 				.dateOfBirth(2005)
 				.build();
 
 		customerRepository.saveAll(Arrays.asList(c1,c2,c3));
+
+		//Address addresses = Address.builder().customer(c1).city(City.ISTANBUL).postcode("456312").addressDetails("bu bir adrestir").build();
+		//addressRepository.save(addresses);
 
 		Account a1 = Account.builder()
 				.id("100")

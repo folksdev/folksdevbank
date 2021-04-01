@@ -2,17 +2,20 @@ package com.folksdevbank.model;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.io.Serializable;
 
-@Entity
+
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @EqualsAndHashCode
-public class Account {
+
+
+@Entity
+public class Account implements Serializable {
 
     @Id
     private String id;

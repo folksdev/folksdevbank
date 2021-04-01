@@ -1,10 +1,4 @@
 
-
-
-
-
-
-
 package com.folksdevbank.controller;
 
 import com.folksdevbank.dto.CreateCustomerRequest;

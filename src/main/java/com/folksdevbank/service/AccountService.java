@@ -108,9 +108,15 @@ public class AccountService {
 
 
     public AccountDto addMoney(String id, Double amount) {
+        //select * from account where id = $(id)
         Optional<Account> accountOptional = accountRepository.findById(id);
+
+
         accountOptional.ifPresent(account -> {
+            //100
             account.setBalance(account.getBalance() + amount);
+            //150
+            //UPDATE folksdev.account SET balance = 150 , city=1 , currency=2, customer_id=1234568 where id = 100
             accountRepository.save(account);
         });
 
