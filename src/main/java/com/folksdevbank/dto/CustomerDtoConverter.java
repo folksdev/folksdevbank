@@ -13,7 +13,7 @@ public class CustomerDtoConverter {
     public CustomerDto convert(Customer customer) {
         CustomerDto customerDto = new CustomerDto();
         customerDto.setId(customer.getId());
-        customerDto.setAddress(new ArrayList<>(customer.getAddress()));
+        customerDto.setAddress(customer.getAddress());
         customerDto.setCity(CityDto.valueOf(customer.getCity().name()));
         customerDto.setName(customer.getName());
         customerDto.setDateOfBirth(customer.getDateOfBirth());

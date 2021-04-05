@@ -11,9 +11,9 @@ import org.junit.Test;
 import org.mockito.Mockito;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.amqp.core.DirectExchange;
+import org.springframework.kafka.core.KafkaTemplate;
 
 import java.util.Arrays;
-import java.util.Set;
 
 public class AccountServiceTest {
 
@@ -24,6 +24,7 @@ public class AccountServiceTest {
     private AccountDtoConverter accountDtoConverter;
     private DirectExchange exchange;
     private AmqpTemplate rabbitTemplate;
+    private KafkaTemplate<String, String> kafkaTemplate;
 
 
     @Before
@@ -33,10 +34,11 @@ public class AccountServiceTest {
         accountDtoConverter = Mockito.mock(AccountDtoConverter.class);
         exchange = Mockito.mock(DirectExchange.class);
         rabbitTemplate = Mockito.mock(AmqpTemplate.class);
+        kafkaTemplate = Mockito.mock(KafkaTemplate.class);
 
         accountService = new AccountService(accountRepository,
                                             customerService,
-                                            accountDtoConverter, exchange, rabbitTemplate);
+                                            accountDtoConverter, exchange, rabbitTemplate, kafkaTemplate);
     }
 
     @Test
@@ -112,7 +114,7 @@ public class AccountServiceTest {
 
         Customer customer = Customer.builder()
                 .id("12345")
-                .address(Arrays.asList(Address.builder().city(City.ISTANBUL).postcode("456312").addressDetails("bu bir adrestir").build()))
+                .address(Address.builder().city(City.ISTANBUL).postcode("456312").addressDetails("bu bir adrestir").build())
                 .city(City.ISTANBUL)
                 .dateOfBirth(1998)
                 .name("Muratcan")
@@ -149,7 +151,7 @@ public class AccountServiceTest {
     private Customer generateCustomer() {
         return Customer.builder()
                 .id("12345")
-                .address(Arrays.asList(Address.builder().city(City.ISTANBUL).postcode("456312").addressDetails("bu bir adrestir").build()))
+                .address(Address.builder().city(City.ISTANBUL).postcode("456312").addressDetails("bu bir adrestir").build())
                 .city(City.ISTANBUL)
                 .dateOfBirth(1998)
                 .name("Muratcan")

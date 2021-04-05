@@ -18,6 +18,6 @@ public class CustomerDto {
     private String name;
     private Integer dateOfBirth;
     private CityDto city;
-    private List<Address> address;
+    private Address address;
 
 }

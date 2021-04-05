@@ -34,7 +34,7 @@ public class FolksdevbankApplication implements CommandLineRunner {
 		Customer c1 = Customer.builder()
 				.id("1234568")
 				.name("Cagri")
-				.address(Arrays.asList(Address.builder().city(City.ISTANBUL).postcode("456312").addressDetails("bu bir adrestir").build()))
+				.address(Address.builder().city(City.ISTANBUL).postcode("456312").addressDetails("bu bir adrestir").build())
 				.city(City.ISTANBUL)
 				.dateOfBirth(1988)
 				.build();
@@ -44,7 +44,7 @@ public class FolksdevbankApplication implements CommandLineRunner {
 				.id("789456")
 				.name("Semih")
 				.city(City.MANISA)
-				.address(Arrays.asList(Address.builder().city(City.MANISA).postcode("456312").addressDetails("bu bir adrestir 2").build()))
+				.address(Address.builder().city(City.MANISA).postcode("456312").addressDetails("bu bir adrestir 2").build())
 				.dateOfBirth(2000)
 				.build();
 
@@ -52,14 +52,11 @@ public class FolksdevbankApplication implements CommandLineRunner {
 				.id("456238")
 				.name("untpleax")
 				.city(City.IZMIR)
-				 .address(Arrays.asList(Address.builder().city(City.IZMIR).postcode("456312").addressDetails("bu bir adrestir 3").build()))
+				 .address(Address.builder().city(City.IZMIR).postcode("456312").addressDetails("bu bir adrestir 3").build())
 				.dateOfBirth(2005)
 				.build();
 
 		customerRepository.saveAll(Arrays.asList(c1,c2,c3));
-
-		//Address addresses = Address.builder().customer(c1).city(City.ISTANBUL).postcode("456312").addressDetails("bu bir adrestir").build();
-		//addressRepository.save(addresses);
 
 		Account a1 = Account.builder()
 				.id("100")

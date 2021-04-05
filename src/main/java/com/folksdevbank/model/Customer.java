@@ -23,6 +23,7 @@ public class Customer {
     private Integer dateOfBirth;
     private City city;
 
-    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
-    private List<Address> address;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "address_id", referencedColumnName = "id")
+    private Address address;
 }

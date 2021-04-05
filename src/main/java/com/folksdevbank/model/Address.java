@@ -28,8 +28,4 @@ public class Address implements Serializable {
     private String postcode;
     private String addressDetails;
 
-    @JsonIgnore
-    @ManyToOne(cascade = {CascadeType.DETACH,CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
-    @JoinColumn(name = "customer_id", referencedColumnName = "id")
-    private Customer customer;
 }
