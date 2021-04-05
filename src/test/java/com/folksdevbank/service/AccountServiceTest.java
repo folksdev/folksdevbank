@@ -112,7 +112,7 @@ public class AccountServiceTest {
 
         Customer customer = Customer.builder()
                 .id("12345")
-                .address(Arrays.asList(Address.builder().city(City.ISTANBUL).postcode("456312").addressDetails("bu bir adrestir").build()))
+                .address(Address.builder().city(City.ISTANBUL).postcode("456312").addressDetails("bu bir adrestir").build())
                 .city(City.ISTANBUL)
                 .dateOfBirth(1998)
                 .name("Muratcan")
@@ -149,7 +149,7 @@ public class AccountServiceTest {
     private Customer generateCustomer() {
         return Customer.builder()
                 .id("12345")
-                .address(Arrays.asList(Address.builder().city(City.ISTANBUL).postcode("456312").addressDetails("bu bir adrestir").build()))
+                .address(Address.builder().city(City.ISTANBUL).postcode("456312").addressDetails("bu bir adrestir").build())
                 .city(City.ISTANBUL)
                 .dateOfBirth(1998)
                 .name("Muratcan")
