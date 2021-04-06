@@ -4,9 +4,14 @@ import com.folksdevbank.model.*;
 import com.folksdevbank.repository.AccountRepository;
 import com.folksdevbank.repository.AddressRepository;
 import com.folksdevbank.repository.CustomerRepository;
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.Info;
+import io.swagger.v3.oas.models.info.License;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 
 import java.util.Arrays;
 
@@ -27,6 +32,18 @@ public class FolksdevbankApplication implements CommandLineRunner {
 
 	public static void main(String[] args) {
 		SpringApplication.run(FolksdevbankApplication.class, args);
+	}
+
+	@Bean
+	public OpenAPI customOpenAPI(@Value("${application-description}") String description,
+								 @Value("${application-version}") String version){
+		return new OpenAPI()
+				.info(new Info()
+				.title("FolksdevBank API")
+				.version(version)
+				.description(description)
+				.license(new License().name("FolksdevBank API Licence")));
+
 	}
 
 	@Override
@@ -82,6 +99,8 @@ public class FolksdevbankApplication implements CommandLineRunner {
 
 		accountRepository.saveAll(Arrays.asList(a1,a2,a3));
 	}
+
+
 
 
 

@@ -11,9 +11,7 @@ import org.junit.Test;
 import org.mockito.Mockito;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.amqp.core.DirectExchange;
-
-import java.util.Arrays;
-import java.util.Set;
+import org.springframework.kafka.core.KafkaTemplate;
 
 public class AccountServiceTest {
 
@@ -24,7 +22,7 @@ public class AccountServiceTest {
     private AccountDtoConverter accountDtoConverter;
     private DirectExchange exchange;
     private AmqpTemplate rabbitTemplate;
-
+    private KafkaTemplate kafkaTemplate;
 
     @Before
     public void setUp() throws Exception {
@@ -33,10 +31,11 @@ public class AccountServiceTest {
         accountDtoConverter = Mockito.mock(AccountDtoConverter.class);
         exchange = Mockito.mock(DirectExchange.class);
         rabbitTemplate = Mockito.mock(AmqpTemplate.class);
+        kafkaTemplate = Mockito.mock(KafkaTemplate.class);
 
         accountService = new AccountService(accountRepository,
                                             customerService,
-                                            accountDtoConverter, exchange, rabbitTemplate);
+                                            accountDtoConverter, exchange, rabbitTemplate, kafkaTemplate);
     }
 
     @Test
