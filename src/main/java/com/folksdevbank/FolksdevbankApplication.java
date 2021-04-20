@@ -43,8 +43,9 @@ public class FolksdevbankApplication implements CommandLineRunner {
 				.version(version)
 				.description(description)
 				.license(new License().name("FolksdevBank API Licence")));
-
 	}
+
+
 
 	@Override
 	public void run(String... args) throws Exception {

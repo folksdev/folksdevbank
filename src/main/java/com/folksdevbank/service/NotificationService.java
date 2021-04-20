@@ -10,9 +10,10 @@ public class NotificationService {
 
     private final Logger logger = LoggerFactory.getLogger(NotificationService.class);
 
-    @KafkaListener(topics = "transfer-notification", groupId = "group-id")
+    @KafkaListener(
+            topics = "transfer-notification",
+            groupId = "group-id")
     public void consume(String message){
-        //start to send email process
         logger.info(String.format("Message receiver \n %s", message));
     }
 }
