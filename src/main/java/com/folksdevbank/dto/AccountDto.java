@@ -4,6 +4,8 @@ package com.folksdevbank.dto;
 import com.folksdevbank.model.Currency;
 import lombok.*;
 
+import java.io.Serializable;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -11,7 +13,7 @@ import lombok.*;
 @Builder
 @ToString
 @EqualsAndHashCode
-public class AccountDto {
+public class AccountDto implements Serializable {
 
     private String id;
     private String customerId;
