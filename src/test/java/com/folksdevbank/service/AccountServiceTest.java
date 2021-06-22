@@ -40,7 +40,6 @@ public class AccountServiceTest {
 
     @Test
     public void whenCreateAccountCalledWithValidRequest_itShouldReturnValidAccountDto(){
-        //Creation test data
         CreateAccountRequest createAccountRequest = generateCreateAccountRequest();
         Customer customer = generateCustomer();
         Account account = generateAccount(createAccountRequest);

@@ -19,8 +19,7 @@ public class Address implements Serializable {
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(
             name = "UUID",
-            strategy = "org.hibernate.id.UUIDGenerator"
-    )
+            strategy = "org.hibernate.id.UUIDGenerator")
     @Column(name = "id", updatable = false, nullable = false)
     private String id;
 
